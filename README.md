@@ -1,8 +1,9 @@
 # Mobile Web Testing Framework
 
-![Tests](https://img.shields.io/badge/tests-5%20passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-7%20passing-brightgreen)
 ![Python](https://img.shields.io/badge/python-3.11-blue)
 ![Selenium](https://img.shields.io/badge/selenium-4.39-orange)
+![CI](https://github.com/arturdmt-alt/QA_Mobile_Appium/workflows/Mobile%20Web%20Tests/badge.svg)
 
 Automated mobile web testing framework using **Selenium WebDriver** with Chrome mobile emulation (Pixel 5).
 
@@ -141,3 +142,4 @@ QA Automation Engineer
 ## Notes
 
 This framework focuses on mobile web testing best practices including parametrization, clean architecture, and scalability. Demonstrates professional QA automation skills.
+
