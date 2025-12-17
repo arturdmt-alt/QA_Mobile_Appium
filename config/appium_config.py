@@ -1,0 +1,6 @@
+APPIUM_HOST = 'localhost'
+APPIUM_PORT = 4723
+PLATFORM_NAME = 'Android'
+DEVICE_NAME = 'emulator-5554'
+AUTOMATION_NAME = 'UiAutomator2'
+IMPLICIT_WAIT = 10
