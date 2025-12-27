@@ -1,11 +1,14 @@
 # Mobile Web Testing Framework
 
+[![Mobile Web Tests](https://github.com/arturdmt-alt/QA_Mobile_Appium/actions/workflows/tests.yml/badge.svg)](https://github.com/arturdmt-alt/QA_Mobile_Appium/actions/workflows/tests.yml)
+
 ![Tests](https://img.shields.io/badge/tests-7%20passing%20%7C%201%20skipped-brightgreen)
 ![Python](https://img.shields.io/badge/python-3.11-blue)
 ![Selenium](https://img.shields.io/badge/selenium-4.39-orange)
-![CI](https://github.com/arturdmt-alt/QA_Mobile_Appium/workflows/Mobile%20Web%20Tests/badge.svg)
 
 Professional mobile web testing framework using Selenium WebDriver with Chrome mobile emulation, CI/CD integration, and production-grade test stability patterns.
+
+---
 
 ## Features
 
@@ -16,19 +19,23 @@ Professional mobile web testing framework using Selenium WebDriver with Chrome m
 - Robust error handling and stability patterns
 - Cross-environment execution (local GUI and CI/CD headless)
 
+---
+
 ## Test Coverage
 
 | Test Suite | Description | Status |
 |------------|-------------|--------|
 | Google Search | Mobile search functionality | Passing |
 | Wikipedia | Article search and navigation | Passing |
-| Amazon | Product search validation | Skipped |
+| Amazon | Product search validation | ⏭️ Skipped |
 | Contact Forms | Form submission and validation | Passing |
 | Multi-language Navigation | Parametrized tests (ES, EN, FR) | Passing |
 
 **Total:** 5 test files, 8 test cases (7 passing, 1 skipped)
 
-Note: Amazon test is intentionally skipped due to bot detection. See "Known Challenges" section.
+*Note: Amazon test is intentionally skipped due to bot detection. See "Known Challenges" section.*
+
+---
 
 ## Tech Stack
 
@@ -39,6 +46,8 @@ Note: Amazon test is intentionally skipped due to bot detection. See "Known Chal
 - pytest-html 4.1
 - Chrome Mobile Emulation (Pixel 5)
 - GitHub Actions CI/CD
+
+---
 
 ## Project Structure
 ```
@@ -62,6 +71,8 @@ QA_Mobile_Appium/
 └── README.md
 ```
 
+---
+
 ## Installation
 ```bash
 # Clone repository
@@ -77,6 +88,8 @@ venv\Scripts\activate     # Windows
 pip install -r requirements.txt
 ```
 
+---
+
 ## Running Tests
 ```bash
 # Run all tests
@@ -91,6 +104,8 @@ pytest tests/test_web_mobile.py -v
 # Run parametrized tests only
 pytest tests/test_navigation_mobile.py -v
 ```
+
+---
 
 ## Key Implementation Details
 
@@ -110,11 +125,13 @@ def test_mobile_navigation_by_language(self, driver, language_id, expected_domai
     # Single test function executes 3 times with different parameters
 ```
 
-Benefits:
+**Benefits:**
 - Follows DRY principles
 - Scalable test design
 - Data-driven testing approach
 - Easy to extend with additional test cases
+
+---
 
 ### Centralized Fixture Management
 
@@ -130,19 +147,55 @@ def driver():
     # Mobile emulation configuration
 ```
 
-Advantages:
+**Advantages:**
 - No duplicate code across test files
 - Automatic environment detection
 - Consistent test execution
 
-### CI/CD Integration
+---
 
-GitHub Actions workflow includes:
-- Automated test execution on every push
-- Chrome browser installation in Linux environment
-- Headless browser support for CI
-- HTML report artifacts
-- Status badge for README
+## Test Results
+```
+tests/test_web_mobile.py::TestWebMobile::test_google_search_mobile PASSED
+tests/test_web_mobile.py::TestWebMobile::test_wikipedia_mobile PASSED
+tests/test_amazon_mobile.py::TestAmazonMobile::test_amazon_search_mobile SKIPPED
+tests/test_form_mobile.py::TestFormMobile::test_contact_form_mobile PASSED
+tests/test_navigation_mobile.py::TestNavigationMobile::test_mobile_navigation_by_language[es] PASSED
+tests/test_navigation_mobile.py::TestNavigationMobile::test_mobile_navigation_by_language[en] PASSED
+tests/test_navigation_mobile.py::TestNavigationMobile::test_mobile_navigation_by_language[fr] PASSED
+```
+
+**Status:** 7 passing, 1 skipped (Amazon - bot protection)
+
+View full HTML report: `reports/report.html`
+
+---
+
+## Troubleshooting & Lessons Learned
+
+### CI/CD Debugging Process (Dec 17, 2024)
+
+**Challenge:** Initial CI/CD implementation revealed cascading failures across workflows #1-#8
+
+**Root Cause:** 
+Multiple issues including ChromeDriver installation, webdriver-manager dependencies, headless mode configuration, and duplicate fixtures in test setup.
+
+**Solution:**
+- Added ChromeDriver installation step in CI workflow
+- Configured headless mode for CI environment  
+- Removed duplicate fixtures causing test interference
+- Stabilized overlay handling with JavaScript clicks
+
+**Current Status:**
+- All 7 mobile web tests passing
+- CI/CD pipeline stable (workflows #9, #10, #11)
+- Full test coverage with evidence screenshots
+- Zero flaky tests
+
+**Key Takeaway:** 
+Mobile testing in CI requires careful configuration of browser drivers, headless modes, and handling of dynamic web elements. This debugging journey demonstrates real-world problem-solving in mobile automation.
+
+---
 
 ## Known Challenges and Solutions
 
@@ -177,6 +230,8 @@ The Amazon test is marked with `@pytest.mark.skip`:
 2. Real device testing with Appium - Outside current project scope
 3. API-level testing - Better approach for comprehensive validation
 
+---
+
 ### Challenge 2: Wikipedia Overlay Banners
 
 **Problem:**
@@ -200,6 +255,8 @@ driver.execute_script("arguments[0].click();", language_link)
 - Zero flaky tests
 - Handles real user-facing UI behavior
 
+---
+
 ### Challenge 3: CI vs Local Environment Differences
 
 **Key differences handled:**
@@ -218,24 +275,18 @@ driver.execute_script("arguments[0].click();", language_link)
 - Conditional CI environment detection
 - Comprehensive try/except error handling
 
-## Test Results
-```
-tests/test_web_mobile.py::TestWebMobile::test_google_search_mobile PASSED
-tests/test_web_mobile.py::TestWebMobile::test_wikipedia_mobile PASSED
-tests/test_amazon_mobile.py::TestAmazonMobile::test_amazon_search_mobile SKIPPED
-tests/test_form_mobile.py::TestFormMobile::test_contact_form_mobile PASSED
-tests/test_navigation_mobile.py::TestNavigationMobile::test_mobile_navigation_by_language[es] PASSED
-tests/test_navigation_mobile.py::TestNavigationMobile::test_mobile_navigation_by_language[en] PASSED
-tests/test_navigation_mobile.py::TestNavigationMobile::test_mobile_navigation_by_language[fr] PASSED
-```
+---
 
-**Status: 7 passing, 1 skipped (Amazon - bot protection)**
+## CI/CD Pipeline
 
-View full HTML report: `reports/report.html`
+GitHub Actions workflow includes:
+- Automated test execution on every push
+- Chrome browser installation in Linux environment
+- Headless browser support for CI
+- HTML report artifacts
+- Status badge for real-time monitoring
 
-## CI/CD Pipeline Status
-
-Current status:
+**Current status:**
 - 7 tests passing consistently
 - 1 test skipped with documentation
 - 0 flaky tests
@@ -243,15 +294,19 @@ Current status:
 
 This demonstrates production-ready test automation, not prototype code.
 
+---
+
 ## Author
 
 **Artur Dmytriyev**  
 QA Automation Engineer
 
-[LinkedIn](https://www.linkedin.com/in/arturdmytriyev/) 
-[GitHub](https://github.com/arturdmt-alt)
+- LinkedIn: [linkedin.com/in/arturdmytriyev](https://www.linkedin.com/in/arturdmytriyev/)
+- GitHub: [github.com/arturdmt-alt](https://github.com/arturdmt-alt)
 
-## Project Notes
+---
+
+## Project Value
 
 This framework demonstrates professional QA automation practices including:
 - Production-grade stability patterns
@@ -259,19 +314,8 @@ This framework demonstrates professional QA automation practices including:
 - Senior-level test design (parametrization, centralized fixtures, CI/CD)
 - Real-world problem-solving approach
 
-Designed for QA positions at EA Games, Google, and enterprise companies requiring robust automation frameworks.
-
-## Future Enhancements
-
-Potential improvements for extended project scope:
-- Real device testing with Appium
-- Playwright comparison and potential migration
-- BrowserStack cloud integration for cross-device testing
-- Visual regression testing capabilities
-- Performance metrics collection
-- Allure reporting integration
+Designed to showcase skills relevant for QA positions at EA Games, Google, and enterprise companies requiring robust automation frameworks.
 
 ---
 
-Last updated: December 2025
-
+If you found this project helpful, give it a star on GitHub!
