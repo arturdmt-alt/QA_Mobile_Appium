@@ -292,8 +292,6 @@ GitHub Actions workflow includes:
 - 0 flaky tests
 - Green CI pipeline on every commit
 
-This demonstrates production-ready test automation, not prototype code.
-
 ---
 
 ## Author
