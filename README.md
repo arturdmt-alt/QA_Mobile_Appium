@@ -306,16 +306,4 @@ QA Automation Engineer
 
 ---
 
-## Project Value
-
-This framework demonstrates professional QA automation practices including:
-- Production-grade stability patterns
-- Transparent documentation of technical challenges
-- Senior-level test design (parametrization, centralized fixtures, CI/CD)
-- Real-world problem-solving approach
-
-Designed to showcase skills relevant for QA positions at EA Games, Google, and enterprise companies requiring robust automation frameworks.
-
----
-
 If you found this project helpful, give it a star on GitHub!
