@@ -27,7 +27,7 @@ Professional mobile web testing framework using Selenium WebDriver with Chrome m
 |------------|-------------|--------|
 | Google Search | Mobile search functionality | Passing |
 | Wikipedia | Article search and navigation | Passing |
-| Amazon | Product search validation | ⏭️ Skipped |
+| Amazon | Product search validation | Skipped |
 | Contact Forms | Form submission and validation | Passing |
 | Multi-language Navigation | Parametrized tests (ES, EN, FR) | Passing |
 
